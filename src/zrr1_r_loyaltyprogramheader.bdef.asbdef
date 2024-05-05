@@ -1,0 +1,111 @@
+managed implementation in class zbp_rr1_r_loyaltyprogramheader unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZRR1_R_LoyaltyProgramHeader alias LoyaltyProgramHeader
+persistent table ZRR1_LYTPGMHDR
+draft table zrr1_pgmhdr_d
+lock master
+total etag LoyaltyPgmMembershipChngOn
+authorization master ( instance )
+early numbering
+etag master LoyaltyPgmMembershipChngOn
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) LoyaltyMembershipID;
+  field ( readonly : update ) BusinessPartnerID;
+  field ( readonly ) LoyaltyPgmPointsAvailable, BusinessPartnerName, LoyaltyPgmPointsRedeemed;
+  field ( mandatory : create ) BusinessPartnerID;
+  association _LoyaltyPgmTransactions { with draft; create; }
+  association _LoyaltyPgmTierDets { with draft; create; }
+  mapping for zrr1_lytpgmhdr corresponding
+
+{
+ LoyaltyMembershipID = lytmemid;
+ BusinessPartnerID = bpid;
+ BusinessPartnerName = bpname;
+ LoyaltyPgmMemberSince = memsince;
+ LoyaltyPgmPointsAvailable = lytpoints_avl;
+ LoyaltyPgmPointsRedeemed = lytpoints_red;
+}
+
+draft action Edit;
+draft action Activate;
+draft action Discard;
+draft action Resume;
+draft determine action Prepare;
+
+}
+
+define behavior for ZRR1_R_LoyalPointsMgmTxnDet alias LoyaltyProgramTransactions
+persistent table ZRR1_LYTPGMTXN
+draft table zrr_lypgmtr_d
+lock dependent by _LoyaltyPgmMembershipHeader
+authorization dependent
+etag master LocalLastChangedAt
+{
+  // Administrative fields: read only
+  field ( mandatory ) LoyaltyPgmTransChngBy, LoyaltyPgmTransCreatBy;
+
+  // Mandatory fields for loyalty program transactions
+  field ( mandatory ) LoyaltyPgmTransactionDate, LoyaltyPgmTransactionValue, LoyaltyPgmTransactionCurrency, LoyaltyPgmActivityType;
+  // Fields that are mandatory for create but should be read-only afterwards
+  field ( readonly ) LoyaltyPgmMembershipID, LoyaltyPgmTransactionID;
+  field ( readonly ) LoyaltyPgmPoints;
+
+  mapping for zrr1_lytpgmtxn
+    {
+      LoyaltyPgmMembershipID        = lytmemid;
+      LoyaltyPgmTransactionID       = lyttxnid;
+      LoyaltyPgmTransactionDate     = lyttxndt;
+      LoyaltyPgmActivityType        = lytacttyp;
+      LoyaltyPgmTransDescription    = lyttxndesc;
+      LoyaltyPgmTransactionCurrency = lyttxncur;
+      LoyaltyPgmPoints              = lytpoints;
+      LoyaltyPgmTransactionValue    = lyttxnval;
+      LoyaltyPgmTransCreatBy        = lyttxncreatby;
+      LoyaltyPgmTransCreatOn        = lyttxncreaton;
+      LoyaltyPgmTransChngBy         = lyttxnchngby;
+      LocalLastChangedAt            = local_last_changed_at;
+    }
+
+  update;
+  delete;
+
+  association _LoyaltyPgmMembershipHeader { with draft; }
+}
+
+define behavior for ZRR1_R_LoyalPointsProgTierDet alias LoyaltyPgmTierDets
+persistent table zrr1_lytpgmtr
+draft table zrr1_lypgmtr_d
+lock dependent by _LoyaltyPgmMembershipHeader
+authorization dependent
+etag master LocalLastChangedAt
+{
+
+  // Mandatory fields for loyalty program tier maintenance
+  field ( mandatory ) LoyaltyTierValidFrom;
+
+  // Fields that are mandatory for create but should be read-only afterwards
+  field ( readonly ) LoyaltyMembershipID;
+
+  mapping for zrr1_lytpgmtr
+    {
+      LoyaltyMembershipID   = lyTmemid;
+      LoyaltyTierID         = lyTtierid;
+      LoyaltyTierValidFrom  = lyTtiervalidfrom;
+      LocalLastChangedAt       = local_last_changed_at;
+      LoyaltyTierStatus     = lyTtierstatus;
+      LoyaltyTierStatusText = lyttierstatustext;
+      LoyaltyTierCreatedBy  = lyTbptiercreatby;
+      LoyaltyTierChangedBy  = lyTbptierchngby;
+      TierWfApprovalDueBy      = tierwfapprovaldueby;
+    }
+
+  update;
+  delete;
+
+  association _LoyaltyPgmMembershipHeader { with draft; }
+}
