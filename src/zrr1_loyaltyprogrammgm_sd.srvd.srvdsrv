@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition for Loyalty Program'
+define service ZRR1_LOYALTYPROGRAMMGM_SD {
+  expose ZRR1_C_LoyaltyProgramHeader   as LoyaltyProgramHeader;
+  expose ZRR1_C_LoyalPointsProgTierDet as LoyaltyPointsProgTierDetails;
+  expose ZRR1_C_LoyalPointsMgmTxnDet   as LoyaltyPointsProgTxnDet;
+}

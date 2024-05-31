@@ -1,0 +1,35 @@
+projection;
+strict ( 1 );
+use draft;
+
+define behavior for ZRR1_C_LoyaltyProgramHeader alias LoyaltyProgramHeader
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _LoyaltyPgmTransactions { create; with draft; }
+  use association _LoyaltyPgmTierDets { create; with draft; }
+}
+
+define behavior for ZRR1_C_LoyalPointsMgmTxnDet alias LoyaltyPointsProgTxnDet
+{
+  use update;
+  use delete;
+
+  use association _LoyaltyPgmMembershipHeader { with draft; }
+}
+
+define behavior for ZRR1_C_LoyalPointsProgTierDet alias LoyaltyPointsProgTierDetails
+{
+  use update;
+  use delete;
+
+  use association _LoyaltyPgmMembershipHeader { with draft; }
+}

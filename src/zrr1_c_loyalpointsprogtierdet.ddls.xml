@@ -5,7 +5,7 @@
    <DDLS>
     <DDLNAME>ZRR1_C_LOYALPOINTSPROGTIERDET</DDLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DDTEXT>Consumption for Loyalty Program Tier Details</DDTEXT>
+    <DDTEXT>Program Tier Details</DDTEXT>
     <SOURCE_TYPE>P</SOURCE_TYPE>
    </DDLS>
   </asx:values>

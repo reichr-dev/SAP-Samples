@@ -1,26 +1,23 @@
-CLASS lhc_LoyaltyProgramHeader DEFINITION INHERITING FROM cl_abap_behavior_handler.
+CLASS lhc_loyaltyprogramheader DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
-
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
-      IMPORTING keys REQUEST requested_authorizations FOR LoyaltyProgramHeader RESULT result.
+      IMPORTING keys REQUEST requested_authorizations FOR loyaltyprogramheader RESULT result.
 
     METHODS earlynumbering_create FOR NUMBERING
-      IMPORTING entities FOR CREATE LoyaltyProgramHeader.
-*
-*  METHODS earlynumbering_cba_loyaltypgmt      FOR NUMBERING
-*      IMPORTING entities FOR CREATE loyaltyprogramheader\_loyaltypgmtransactions.
+      IMPORTING entities FOR CREATE loyaltyprogramheader.
+
+    METHODS earlynumbering_cba_loyaltypgmt      FOR NUMBERING
+      IMPORTING entities FOR CREATE loyaltyprogramheader\_loyaltypgmtransactions.
 
 ENDCLASS.
 
-CLASS lhc_LoyaltyProgramHeader IMPLEMENTATION.
 
+CLASS lhc_loyaltyprogramheader IMPLEMENTATION.
   METHOD get_instance_authorizations.
   ENDMETHOD.
-
   METHOD earlynumbering_create.
   ENDMETHOD.
-
-* METHOD earlynumbering_cba_loyaltypgmt.
-*  ENDMETHOD.
+  METHOD earlynumbering_cba_loyaltypgmt.
+  ENDMETHOD.
 
 ENDCLASS.

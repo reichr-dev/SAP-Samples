@@ -1,5 +1,5 @@
-@AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Consumption for Loyalty Program Transaction Details'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
 @Metadata.allowExtensions: true
 
 define view entity ZRR1_C_LoyalPointsMgmTxnDet
@@ -23,7 +23,6 @@ define view entity ZRR1_C_LoyalPointsMgmTxnDet
       LoyaltyPgmTransChngBy,
       @UI.hidden: true
       LocalLastChangedAt,
-
       /* Associations */
       _LoyaltyPgmMembershipHeader : redirected to parent ZRR1_C_LoyaltyProgramHeader
 }

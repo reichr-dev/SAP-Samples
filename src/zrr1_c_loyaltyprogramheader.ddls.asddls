@@ -1,10 +1,9 @@
-@EndUserText.label: 'Consumption for Loyalty Program Header'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Consumption for Loyalty Program Header'
 @Metadata.allowExtensions: true
 @ObjectModel.usageType:{
     sizeCategory: #XL,
-    dataClass: #TRANSACTIONAL
-}
+    dataClass: #TRANSACTIONAL }
 
 define root view entity ZRR1_C_LoyaltyProgramHeader
   provider contract transactional_query
@@ -14,12 +13,12 @@ define root view entity ZRR1_C_LoyaltyProgramHeader
   key LoyaltyMembershipID,
       @EndUserText.label: 'Customer ID'
       BusinessPartnerID,
-      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZEXES1_CL_ERPINT_BUPA_NAME'
+      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZCL_RR1_ERPINT_BUPA_NAME'
       @EndUserText.label: 'Customer Name'
       BusinessPartnerName,
       @EndUserText.label: 'Member Since'
       LoyaltyPgmMemberSince,
-      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZCL_EXES1_PGMHDR_VFIELDS'
+      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZCL_RR1_PGMHDR_VFIELDS'
       @EndUserText.label: 'Loyalty Points Available'
       LoyaltyPgmPointsAvailable,
       @EndUserText.label: 'Loyalty Points Redeemed'
@@ -36,7 +35,6 @@ define root view entity ZRR1_C_LoyaltyProgramHeader
       LoyaltyPgmMembershipLclChngAt,
       @UI.hidden: true
       LoyaltyPgmMembershipChngBy,
-
       /* Associations */
       _LoyaltyPgmTierDets     : redirected to composition child ZRR1_C_LoyalPointsProgTierDet,
       _LoyaltyPgmTransactions : redirected to composition child ZRR1_C_LoyalPointsMgmTxnDet

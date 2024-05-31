@@ -1,8 +1,12 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'Consumption for Loyalty Program Tier Details'
+@EndUserText.label: 'Program Tier Details'
 @Metadata.allowExtensions: true
-
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
 define view entity ZRR1_C_LoyalPointsProgTierDet
   as projection on ZRR1_R_LoyalPointsProgTierDet
 {
@@ -10,11 +14,11 @@ define view entity ZRR1_C_LoyalPointsProgTierDet
   key LoyaltyTierID,
   key LoyaltyTierValidFrom,
       @UI.textArrangement: #TEXT_ONLY
-      @ObjectModel.text.element: ['TierStatusText']
+      @ObjectModel.text.element: [ 'TierStatusText' ]
       LoyaltyTierStatus,
       _TierStatusText.text as TierStatusText,
       LoyaltyTierStatusText,
-      //      TierCountry,
+
       /* Admininstrative fields */
       @UI.hidden: true
       LoyaltyTierCreatedBy,
@@ -22,8 +26,9 @@ define view entity ZRR1_C_LoyalPointsProgTierDet
       LoyaltyTierChangedBy,
       @UI.hidden: true
       LocalLastChangedAt,
-      Tierwfapprovaldueby,
 
+
+      Tierwfapprovaldueby,
       /* Associations */
-      _LoyaltyPgmMembershipHeader : redirected to parent ZRR1_C_LoyaltyProgramHeader
+      _LoyaltyPgmMembershipHeader : redirected to parent ZRR1_C_LOYALTYPROGRAMHEADER
 }

@@ -16,7 +16,7 @@ define view entity ZRR1_R_LoyalPointsProgTierDet
       @Semantics.user.createdBy: true
       LoyaltyTierDetails.lytbptiercreatby      as LoyaltyTierCreatedBy,
       @Semantics.user.lastChangedBy: true
-      LoyaltyTierDetails.lytbptierchngby       as Lytbptierchngby,
+      LoyaltyTierDetails.lytbptierchngby       as LoyaltyTierChangedBy,
       @Semantics.systemDateTime.localInstanceLastChangedAt: true
       LoyaltyTierDetails.local_last_changed_at as LocalLastChangedAt,
 
